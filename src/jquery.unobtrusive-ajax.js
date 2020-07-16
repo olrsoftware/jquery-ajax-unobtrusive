@@ -196,8 +196,14 @@
         if (!isCancel && !validate(this)) {
             return;
         }
+        //new code fermin
+        var action = this.action;
+        if ($(clickTarget[0]).attr("formaction") && clickTarget[0].formAction) {
+            action = clickTarget[0].formAction;
+        }
+        //end new code fermin
         asyncRequest(this, {
-            url: this.action,
+            url: action, // this.action, //new code fermin
             type: this.method || "GET",
             data: clickInfo.concat($(this).serializeArray())
         });
