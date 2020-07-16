@@ -1,3 +1,6 @@
+This modification allow using the librery with razor pages and multiple handlers.
+Must include {handler?} in the route of the page for correct working.
+
 jQuery Unobtrusive Ajax
 =============================
 
