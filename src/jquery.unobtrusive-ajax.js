@@ -188,6 +188,21 @@
         }, 0);
     });
 
+    //new code fermin
+    function formAction(clickTarget, action) {
+        var target = clickTarget[0];
+        if (!($(target).is('button') || $(target).is('a'))) {
+            target = $(clickTarget[0]).parent('button');
+            if (!target) {
+                target = $(clickTarget[0]).parent('a');
+            }
+        }
+        if ($(target).attr("formaction")) {
+            action = $(target).attr("formaction");
+        }
+        return action;
+    }
+    //end new code fermin
     $(document).on("submit", "form[data-ajax=true]", function (evt) {
         var clickInfo = $(this).data(data_click) || [],
             clickTarget = $(this).data(data_target),
@@ -197,10 +212,7 @@
             return;
         }
         //new code fermin
-        var action = this.action;
-        if ($(clickTarget[0]).attr("formaction") && clickTarget[0].formAction) {
-            action = clickTarget[0].formAction;
-        }
+        var action = formAction(clickTarget, this.action);
         //end new code fermin
         asyncRequest(this, {
             url: action, // this.action, //new code fermin
@@ -209,3 +221,4 @@
         });
     });
 }(jQuery));
+
